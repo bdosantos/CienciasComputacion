@@ -5,45 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juegos Deportivos Malasaña</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aframe-html-shader@0.3.0/dist/aframe-html-shader.min.js"></script>
 </head>
 <body>
     <a-scene>
         <!-- Carga de modelos -->
         <a-assets>
             <a-asset-item id="museo2-glb" src="museo2.glb"></a-asset-item>
-
-            <!-- Página embebida del juego de Scratch -->
-          <a-html id="scratch-game" src="https://scratch.mit.edu/projects/1085906128/embed" />
         </a-assets>
 
-        <!-- Modelo 3D del museo y objetos internos -->
+        <!-- Modelo 3D del museo -->
         <a-entity gltf-model="#museo2-glb" scale="1500 1000 1500">
-            <!-- Luz ambiental con intensidad baja para evitar sobreiluminar las paredes -->
+            <!-- Luz ambiental -->
             <a-light type="ambient" color="#FFFFFF" intensity="0.35"></a-light>
-            
-            <!-- Cámara dentro del museo con controles de mira y controles WASD -->
+
+            <!-- Cámara -->
             <a-entity camera look-controls wasd-controls="acceleration: 150" position="0 -50 0">
                 <a-cursor></a-cursor>
             </a-entity>
-
-            <!-- Luz direccional baja para iluminar el suelo sin afectar mucho a las paredes -->
-            <a-light type="directional" color="#FFFFFF" intensity="1" position="0 10 0" rotation="-45 0 0"></a-light>
-
-            <!-- Luces puntuales ajustadas para iluminar el suelo dentro del museo -->
-            <a-light type="point" color="#FFFFFF" intensity="0.5" position="0 5 0" distance="500"></a-light>
-            <a-light type="point" color="#FFFFFF" intensity="0.5" position="0 5 0" distance="400"></a-light>
-            <a-light type="point" color="#FFFFFF" intensity="0.5" position="-5 0 0" distance="400"></a-light>
-            <a-light type="point" color="#FFFFFF" intensity="0.5" position="0 5 -0" distance="300"></a-light>
         </a-entity>
 
-        <!-- Panel para el juego de Scratch -->
+        <!-- Panel con el juego de Scratch -->
         <a-entity position="0 2 -4">
-            <a-plane 
-                geometry="width: 4; height: 3" 
-                material="shader: html; target: #scratch-game">
-            </a-plane>
+            <a-plane geometry="width: 4; height: 3" material="color: #FFFFFF"></a-plane>
+            <a-entity position="0 0 0.01">
+                <iframe 
+                    src="https://scratch.mit.edu/projects/1085906128/embed" 
+                    style="width: 800px; height: 600px; border: none;"
+                    allowfullscreen>
+                </iframe>
+            </a-entity>
         </a-entity>
     </a-scene>
 </body>
