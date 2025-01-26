@@ -3,40 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Museo de la poesía</title>
+    <title>Museo de Poesía</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
 </head>
 <body>
-    <a-scene background="color: #222222">
+    <a-scene>
         <!-- Carga de modelos -->
         <a-assets>
-            <a-asset-item id="museo-glb" src="museo.glb"></a-asset-item>
+            <a-asset-item id="museo-glb" src="https://bdosantos.github.io/Sigma/museo.glb"></a-asset-item>
         </a-assets>
 
-        <!-- Modelo 3D del museo -->
-        <a-entity gltf-model="#museo-glb" scale="800 800 800" position="0 0 -10">
-            <!-- Luces -->
-            <a-light type="ambient" color="#BBBBBB" intensity="0.8"></a-light>
-            <a-light type="directional" color="#FFFFFF" intensity="0.5" position="5 10 7"></a-light>
-        </a-entity>
+        <!-- Modelo 3D del museo y objetos internos -->
+        <a-entity gltf-model="#museo-glb" scale="0.1 0.1 0.1">
+            <!-- Luz ambiental con intensidad baja para evitar sobreiluminar las paredes -->
+            <a-light type="ambient" color="#FFFFFF" intensity="0.35"></a-light>
 
-        <!-- Cámara -->
-        <a-entity camera look-controls wasd-controls="acceleration: 150" position="0 10 20">
-            <a-cursor></a-cursor>
-        </a-entity>
+            <!-- Cámara dentro del museo con controles de mira y controles WASD -->
+            
+          <!-- Cámara dentro del museo con controles de mira y controles WASD -->
+            <a-entity camera look-controls wasd-controls="acceleration: 150" position="80 60 100"></a-entity>
 
-        <!-- Panel con el juego de Scratch -->
-        <a-entity position="0 5 -10">
-            <a-plane geometry="width: 6; height: 4" material="color: #FFFFFF"></a-plane>
-            <a-entity position="-2 0 0">
-                <iframe 
-                    src="https://scratch.mit.edu/projects/1085906128/embed" 
-                    style="width: 1200px; height: 800px; border: none;"
-                    allowfullscreen>
-                </iframe>
-            </a-entity>
+            <!-- Luz direccional baja para iluminar el suelo sin afectar mucho a las paredes -->
+            <a-light type="directional" color="#FFFFFF" intensity="1" position="0 100 -300" rotation="-45 0 0"></a-light>
+
+            <!-- Luces puntuales ajustadas para iluminar el suelo dentro del museo -->
+            <a-light type="point" color="#FFFFFF" intensity="0.4" position="0 50 -500" distance="500"></a-light>
+            <a-light type="point" color="#FFFFFF" intensity="0.35" position="100 50 100" distance="400"></a-light>
+            <a-light type="point" color="#FFFFFF" intensity="0.35" position="-100 50 -100" distance="400"></a-light>
+            <a-light type="point" color="#FFFFFF" intensity="0.3" position="0 50 -200" distance="300"></a-light>
         </a-entity>
     </a-scene>
 </body>
 </html>
-
