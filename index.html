@@ -3,39 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Museo de la poesía</title>
+    <title>Museo de poesía</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.3.0/dist/aframe-physics-system.min.js"></script>
 </head>
 <body>
-    <a-scene background="color: #222222">
+    <a-scene physics="debug: false">
         <!-- Carga de modelos -->
         <a-assets>
             <a-asset-item id="museo-glb" src="museo.glb"></a-asset-item>
+            <!-- orden alfabético -->
+                  
+           
         </a-assets>
 
         <!-- Modelo 3D del museo -->
-        <a-entity gltf-model="#museo-glb" scale="800 800 800" position="0 0 -10">
-            <!-- Luces -->
-            <a-light type="ambient" color="#BBBBBB" intensity="0.8"></a-light>
-            <a-light type="directional" color="#FFFFFF" intensity="0.5" position="5 10 7"></a-light>
+        <a-entity gltf-model="#museo-glb" scale="10 10 10" position="10 0 10" static-body>
+            
+            <!-- Cámara dentro del museo con controles de mira y controles WASD -->
+             <a-entity camera look-controls wasd-controls="acceleration: 500" position="-200 10 -300"
+            rotation="0 0 0" dynamic-body look-at="190 10 -34"></a-entity>
         </a-entity>
+      
+        <!-- Luz ambiente para iluminar el entorno -->
+        <a-light type="ambient" color="#FFFFFF" intensity="0.5"></a-light>
 
-        <!-- Cámara -->
-        <a-entity camera look-controls wasd-controls="acceleration: 150" position="0 10 20">
-            <a-cursor></a-cursor>
-        </a-entity>
+        <!-- Luces puntuales para iluminar el interior del museo -->
+        <a-light type="point" color="#FFFFFF" intensity="0.35" position="0 4 0"></a-light>
+        <a-light type="point" color="#FFFFFF" intensity="0.35" position="10 4 0"></a-light>
+        <a-light type="point" position="45 20 180" intensity="1.5" color="#FFFFFF" distance="50" decay="2"></a-light>
 
-        <!-- Panel con el juego de Scratch -->
-        <a-entity position="0 5 -10">
-            <a-plane geometry="width: 6; height: 4" material="color: #FFFFFF"></a-plane>
-            <a-entity position="-2 0 0">
-                <iframe 
-                    src="https://scratch.mit.edu/projects/1085906128/embed" 
-                    style="width: 1200px; height: 800px; border: none;"
-                    allowfullscreen>
-                </iframe>
-            </a-entity>
-        </a-entity>
+        <a-light type="point" color="#FFFFFF" intensity="0.35" position="-10 4 0"></a-light>
+        <a-light type="point" color="#FFFFFF" intensity="0.35" position="0 4 10"></a-light>
+        <a-light type="point" color="#FFFFFF" intensity="0.35" position="0 4 -10"></a-light>
     </a-scene>
 </body>
 </html>
